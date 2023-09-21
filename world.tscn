@@ -1,0 +1,168 @@
+[gd_scene load_steps=13 format=3 uid="uid://cl067xjhfu3iu"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_vuft1"]
+[ext_resource type="PackedScene" uid="uid://con8vdb6nw80b" path="res://environment.tscn" id="2_lvq2r"]
+[ext_resource type="Texture2D" uid="uid://7xmequ1ra176" path="res://addons/kenney_particle_pack/circle_05.png" id="3_2id0b"]
+[ext_resource type="PackedScene" uid="uid://bd7rljigs8jhn" path="res://inventory/inventory.tscn" id="4_jw6oo"]
+[ext_resource type="Script" path="res://inventory/inventory_interface.gd" id="4_l4bvn"]
+[ext_resource type="PackedScene" uid="uid://bon5jp3uor5w6" path="res://inventory/slot.tscn" id="6_4ypm7"]
+[ext_resource type="Script" path="res://FpsCounter.gd" id="7_qsnr3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ya5ks"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_dvmsm"]
+sky_material = SubResource("ProceduralSkyMaterial_ya5ks")
+
+[sub_resource type="Environment" id="Environment_1eoul"]
+background_mode = 2
+sky = SubResource("Sky_dvmsm")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1njy"]
+bg_color = Color(0.741176, 0.054902, 0.113725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lqswu"]
+bg_color = Color(0.317647, 0.705882, 0, 1)
+
+[node name="World" type="Node"]
+script = ExtResource("1_vuft1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0.0873857, 5.20471, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1eoul")
+
+[node name="Environment" parent="." instance=ExtResource("2_lvq2r")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 279.0
+offset_top = 208.0
+offset_right = -279.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter address"
+alignment = 1
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.03, 0.03)
+pivot_offset = Vector2(576, 324)
+texture = ExtResource("3_2id0b")
+stretch_mode = 5
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = 590.0
+offset_right = -732.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_s1njy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lqswu")
+max_value = 3.0
+value = 3.0
+show_percentage = false
+
+[node name="InventoryInterface" type="Control" parent="CanvasLayer/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_l4bvn")
+
+[node name="PlayerInventory" parent="CanvasLayer/HUD/InventoryInterface" instance=ExtResource("4_jw6oo")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="ExternalInventory" parent="CanvasLayer/HUD/InventoryInterface" instance=ExtResource("4_jw6oo")]
+visible = false
+layout_mode = 0
+offset_left = 567.0
+offset_top = 301.0
+offset_right = 607.0
+offset_bottom = 341.0
+
+[node name="GrabbedSlot" parent="CanvasLayer/HUD/InventoryInterface" instance=ExtResource("6_4ypm7")]
+visible = false
+modulate = Color(1, 1, 1, 0.498039)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="FpsCounter" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("7_qsnr3")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

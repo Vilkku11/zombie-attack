@@ -1,0 +1,49 @@
+[gd_scene load_steps=14 format=3 uid="uid://con8vdb6nw80b"]
+
+[ext_resource type="PackedScene" uid="uid://c6uao1jwekaoi" path="res://Blender/Environment.blend" id="1_eda2r"]
+[ext_resource type="Texture2D" uid="uid://bv8hut7vmrh6d" path="res://addons/kenney_prototype_textures/dark/texture_09.png" id="2_db5uv"]
+[ext_resource type="PackedScene" uid="uid://dtftoaj5f3jm" path="res://interactable/chest.tscn" id="3_tr1i3"]
+[ext_resource type="Script" path="res://inventory/inventory_data.gd" id="4_wclif"]
+[ext_resource type="Resource" uid="uid://evu8lr68utqm" path="res://item/items/blue_book.tres" id="5_ntvhh"]
+[ext_resource type="Script" path="res://inventory/slot_data.gd" id="6_fvho6"]
+[ext_resource type="PackedScene" uid="uid://btfq3lhdn70xj" path="res://item/pick_up/pick_up.tscn" id="7_q40dt"]
+[ext_resource type="Resource" uid="uid://6xcwbe71lgqb" path="res://item/items/apple.tres" id="8_qu7pe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3e7p"]
+albedo_texture = ExtResource("2_db5uv")
+uv1_triplanar = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fw8es"]
+data = PackedVector3Array(-13.3059, 0, 14.715, 13.3059, 0, -14.715, -13.3059, 0, -14.715, -13.3059, 0, 14.715, 13.3059, 0, 14.715, 13.3059, 0, -14.715, 13.0238, 1.9655, -14.403, -13.0238, -0.1185, -14.403, -13.0238, 1.9655, -14.403, 13.0238, 1.9655, -14.403, 13.0238, -0.1185, -14.403, -13.0238, -0.1185, -14.403, 13.3059, 0, 14.715, 13.3059, 1.9655, -14.715, 13.3059, 0, -14.715, 13.3059, 0, 14.715, 13.3059, 1.9655, 14.715, 13.3059, 1.9655, -14.715, -13.3059, 0, -14.715, -13.3059, 1.9655, 14.715, -13.3059, 0, 14.715, -13.3059, 0, -14.715, -13.3059, 1.9655, -14.715, -13.3059, 1.9655, 14.715, 13.3059, 0, -14.715, -13.3059, 1.9655, -14.715, -13.3059, 0, -14.715, 13.3059, 0, -14.715, 13.3059, 1.9655, -14.715, -13.3059, 1.9655, -14.715, -13.3059, 0, 14.715, 13.3059, 1.9655, 14.715, 13.3059, 0, 14.715, -13.3059, 0, 14.715, -13.3059, 1.9655, 14.715, 13.3059, 1.9655, 14.715, -13.0401, 1.9655, 14.4211, -13.3059, 1.9655, -14.715, -13.0401, 1.9655, -14.4211, -13.0401, 1.9655, 14.4211, -13.3059, 1.9655, 14.715, -13.3059, 1.9655, -14.715, 13.0401, 1.9655, 14.4211, -13.3059, 1.9655, 14.715, -13.0401, 1.9655, 14.4211, 13.0401, 1.9655, 14.4211, 13.3059, 1.9655, 14.715, -13.3059, 1.9655, 14.715, 13.0401, 1.9655, -14.4211, 13.3059, 1.9655, 14.715, 13.0401, 1.9655, 14.4211, 13.0401, 1.9655, -14.4211, 13.3059, 1.9655, -14.715, 13.3059, 1.9655, 14.715, -13.0401, 1.9655, -14.4211, 13.3059, 1.9655, -14.715, 13.0401, 1.9655, -14.4211, -13.0401, 1.9655, -14.4211, -13.3059, 1.9655, -14.715, 13.3059, 1.9655, -14.715, -13.0238, 1.9655, 14.403, -13.0401, 1.9655, -14.4211, -13.0238, 1.9655, -14.403, -13.0238, 1.9655, 14.403, -13.0401, 1.9655, 14.4211, -13.0401, 1.9655, -14.4211, 13.0238, 1.9655, 14.403, -13.0401, 1.9655, 14.4211, -13.0238, 1.9655, 14.403, 13.0238, 1.9655, 14.403, 13.0401, 1.9655, 14.4211, -13.0401, 1.9655, 14.4211, 13.0238, 1.9655, -14.403, 13.0401, 1.9655, 14.4211, 13.0238, 1.9655, 14.403, 13.0238, 1.9655, -14.403, 13.0401, 1.9655, -14.4211, 13.0401, 1.9655, 14.4211, -13.0238, 1.9655, -14.403, 13.0401, 1.9655, -14.4211, 13.0238, 1.9655, -14.403, -13.0238, 1.9655, -14.403, -13.0401, 1.9655, -14.4211, 13.0401, 1.9655, -14.4211, -13.0238, -0.1185, 14.403, 13.0238, -0.1185, -14.403, 13.0238, -0.1185, 14.403, -13.0238, -0.1185, 14.403, -13.0238, -0.1185, -14.403, 13.0238, -0.1185, -14.403, -13.0238, 1.9655, 14.403, 13.0238, -0.1185, 14.403, 13.0238, 1.9655, 14.403, -13.0238, 1.9655, 14.403, -13.0238, -0.1185, 14.403, 13.0238, -0.1185, 14.403, 13.0238, 1.9655, 14.403, 13.0238, -0.1185, -14.403, 13.0238, 1.9655, -14.403, 13.0238, 1.9655, 14.403, 13.0238, -0.1185, 14.403, 13.0238, -0.1185, -14.403, -13.0238, 1.9655, -14.403, -13.0238, -0.1185, 14.403, -13.0238, 1.9655, 14.403, -13.0238, 1.9655, -14.403, -13.0238, -0.1185, -14.403, -13.0238, -0.1185, 14.403)
+
+[sub_resource type="Resource" id="Resource_ktxfu"]
+script = ExtResource("6_fvho6")
+item_data = ExtResource("5_ntvhh")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_4gyfh"]
+script = ExtResource("4_wclif")
+slot_datas = Array[ExtResource("6_fvho6")]([SubResource("Resource_ktxfu"), null, null, null, null])
+
+[sub_resource type="Resource" id="Resource_oosup"]
+script = ExtResource("6_fvho6")
+item_data = ExtResource("8_qu7pe")
+quantity = 5
+
+[node name="Environment" instance=ExtResource("1_eda2r")]
+
+[node name="Plane" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_a3e7p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_fw8es")
+
+[node name="Chest" parent="." index="1" instance=ExtResource("3_tr1i3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+inventory_data = SubResource("Resource_4gyfh")
+
+[node name="PickUp" parent="." index="2" instance=ExtResource("7_q40dt")]
+transform = Transform3D(-0.000122114, 0, 1, 0, 1, 0, -1, 0, -0.000122114, 8.0386, 1.29943, 0.598946)
+slot_data = SubResource("Resource_oosup")
