@@ -4,6 +4,7 @@ extends Node
 @onready var address_entry = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry
 @onready var hud = $CanvasLayer/HUD
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
+@onready var settings = $CanvasLayer/Settings
 
 @onready var inventory_interface = $CanvasLayer/HUD/InventoryInterface
 
@@ -41,8 +42,21 @@ func _on_join_button_pressed():
 	enet_peer.create_client("localhost", PORT)
 	multiplayer.multiplayer_peer = enet_peer
 	
+
+
+func _on_settings_pressed():
+	hud.hide()
+	main_menu.hide()
+	settings.show()
+	print(OS.get_executable_path())
 	
 	
+func _on_quit_pressed():
+	get_tree().quit()
+	
+	
+
+
 
 func add_player(peer_id):
 	var player = Player.instantiate()
@@ -98,3 +112,11 @@ func upnp_setup():
 	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP Port Mapping Failed! Error %s" % map_result)
 	
 	print("Success! Join Address: %s" % upnp.query_external_address())
+
+
+
+
+
+
+
+

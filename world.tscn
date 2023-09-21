@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cl067xjhfu3iu"]
+[gd_scene load_steps=14 format=3 uid="uid://cl067xjhfu3iu"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_vuft1"]
 [ext_resource type="PackedScene" uid="uid://con8vdb6nw80b" path="res://environment.tscn" id="2_lvq2r"]
 [ext_resource type="Texture2D" uid="uid://7xmequ1ra176" path="res://addons/kenney_particle_pack/circle_05.png" id="3_2id0b"]
+[ext_resource type="Script" path="res://menu/Settings.gd" id="3_2wm45"]
 [ext_resource type="PackedScene" uid="uid://bd7rljigs8jhn" path="res://inventory/inventory.tscn" id="4_jw6oo"]
 [ext_resource type="Script" path="res://inventory/inventory_interface.gd" id="4_l4bvn"]
 [ext_resource type="PackedScene" uid="uid://bon5jp3uor5w6" path="res://inventory/slot.tscn" id="6_4ypm7"]
@@ -38,6 +39,9 @@ shadow_enabled = true
 environment = SubResource("Environment_1eoul")
 
 [node name="Environment" parent="." instance=ExtResource("2_lvq2r")]
+
+[node name="Camera3D" type="Camera3D" parent="Environment"]
+transform = Transform3D(0.717211, 0.250954, -0.6501, -0.185938, 0.967999, 0.168539, 0.671591, 7.52961e-09, 0.740922, -1.10464, 3.28609, 5.10359)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -81,6 +85,83 @@ text = "Join"
 layout_mode = 2
 placeholder_text = "Enter address"
 alignment = 1
+
+[node name="Settings" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="Settings" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_2wm45")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/Settings/MarginContainer"]
+layout_mode = 2
+
+[node name="Video" type="TabBar" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer"]
+layout_mode = 2
+theme_override_constants/v_separation = 5
+
+[node name="DisplayModeLabel" type="Label" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Display Mode"
+
+[node name="DisplayModeBtn" type="OptionButton" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="VsyncLabel" type="Label" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Vsync"
+
+[node name="VsyncBtn" type="CheckButton" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="ShowFpsLabel" type="Label" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Show fps"
+
+[node name="ShowFpsBtn" type="CheckButton" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Gameplay" type="GridContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Audio" type="GridContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Keyboard" type="GridContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Back" type="Button" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+text = "Back"
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
 visible = false
@@ -165,4 +246,10 @@ spawn_path = NodePath("..")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="item_selected" from="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer/DisplayModeBtn" to="CanvasLayer/Settings" method="_on_display_mode_btn_item_selected"]
+[connection signal="toggled" from="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer/VsyncBtn" to="CanvasLayer/Settings" method="_on_vsync_btn_toggled"]
+[connection signal="toggled" from="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer/ShowFpsBtn" to="CanvasLayer/Settings" method="_on_show_fps_btn_toggled"]
+[connection signal="pressed" from="CanvasLayer/Settings/MarginContainer/TabContainer/Back" to="CanvasLayer/Settings" method="_on_back_pressed"]
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
