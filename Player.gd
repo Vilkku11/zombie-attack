@@ -35,8 +35,8 @@ func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * 0.005)
-		camera.rotate_x(-event.relative.y * 0.005)
+		rotate_y(-event.relative.x * GlobalSettings.mouse_sens )
+		camera.rotate_x(-event.relative.y * GlobalSettings.mouse_sens)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 	
 	if Input.is_action_just_pressed("shoot") and animation_player.current_animation != "shoot":
@@ -50,6 +50,9 @@ func _unhandled_input(event):
 		
 	if Input.is_action_just_pressed("interact"):
 		interact()
+	
+	
+	
 	
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return

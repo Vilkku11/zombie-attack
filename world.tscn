@@ -46,15 +46,14 @@ transform = Transform3D(0.717211, 0.250954, -0.6501, -0.185938, 0.967999, 0.1685
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.301389
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 279.0
-offset_top = 208.0
-offset_right = -279.0
-offset_bottom = -208.0
+anchor_bottom = 0.698611
+offset_bottom = -3.05176e-05
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
 layout_mode = 2
@@ -95,7 +94,6 @@ layout_mode = 2
 text = "Quit"
 
 [node name="Settings" type="PanelContainer" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -105,25 +103,38 @@ script = ExtResource("3_2wm45")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings"]
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
 
 [node name="TabContainer" type="TabContainer" parent="CanvasLayer/Settings/MarginContainer"]
 layout_mode = 2
+theme_override_constants/side_margin = 0
 
 [node name="Video" type="TabBar" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
 layout_mode = 2
+tab_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.5
+offset_top = -77.0
+offset_right = 76.5
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer"]
 layout_mode = 2
-theme_override_constants/v_separation = 5
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
 
 [node name="ResolutionLabel" type="Label" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
 layout_mode = 2
@@ -131,6 +142,10 @@ text = "Resolution"
 
 [node name="ResolutionBtn" type="OptionButton" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
 layout_mode = 2
+
+[node name="AspectRatioLabel" type="Label" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Aspect ratio"
 
 [node name="AspectRatioBtn" type="OptionButton" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
 layout_mode = 2
@@ -156,21 +171,83 @@ text = "Show fps"
 [node name="ShowFpsBtn" type="CheckButton" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer"]
 layout_mode = 2
 
+[node name="Mouse + Keyboard2" type="TabBar" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+tab_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -15.5
+offset_right = 97.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="MouseSensitivityLabel" type="Label" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Mouse sensitivity"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer/GridContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+min_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="MouseSensLabel" type="Label" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+text = "1.00"
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer/GridContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(50, 35)
+layout_direction = 2
+layout_mode = 2
+context_menu_enabled = false
+caret_multiple = false
+
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 10.0
+step = 0.01
+value = 1.0
+update_on_text_changed = true
+
 [node name="Gameplay" type="GridContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
+columns = 2
 
-[node name="Audio" type="GridContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/Settings/MarginContainer/TabContainer/Gameplay"]
 visible = false
 layout_mode = 2
+text = "testiiiiii"
 
-[node name="Keyboard" type="GridContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
+[node name="Audio" type="GridContainer" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
 
 [node name="Back" type="Button" parent="CanvasLayer/Settings/MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
+action_mode = 0
 text = "Back"
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
@@ -263,5 +340,7 @@ spawn_path = NodePath("..")
 [connection signal="item_selected" from="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer/DisplayModeBtn" to="CanvasLayer/Settings" method="_on_display_mode_btn_item_selected"]
 [connection signal="toggled" from="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer/VsyncBtn" to="CanvasLayer/Settings" method="_on_vsync_btn_toggled"]
 [connection signal="toggled" from="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer/ShowFpsBtn" to="CanvasLayer/Settings" method="_on_show_fps_btn_toggled"]
+[connection signal="value_changed" from="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer/GridContainer/HBoxContainer/HSlider" to="CanvasLayer/Settings" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer/GridContainer/HBoxContainer/SpinBox" to="CanvasLayer/Settings" method="_on_spin_box_value_changed"]
 [connection signal="pressed" from="CanvasLayer/Settings/MarginContainer/TabContainer/Back" to="CanvasLayer/Settings" method="_on_back_pressed"]
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
