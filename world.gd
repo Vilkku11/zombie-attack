@@ -48,7 +48,6 @@ func _on_settings_pressed():
 	hud.hide()
 	main_menu.hide()
 	settings.show()
-	print(OS.get_executable_path())
 	
 	
 func _on_quit_pressed():
