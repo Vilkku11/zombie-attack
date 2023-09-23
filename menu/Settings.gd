@@ -30,10 +30,10 @@ func init_settings():
 
 	vsync_btn.set_pressed_no_signal(GlobalSettings.vsync)
 	showfps_btn.set_pressed_no_signal(GlobalSettings.fps_counter)
-	print(GlobalSettings.mouse_sens*1000)
-	mouse_sens_label.text = str(GlobalSettings.mouse_sens*1000)
-	mouse_sens_slider.set_value_no_signal(GlobalSettings.mouse_sens*10000)
-	mouse_sens_spinbox.value = GlobalSettings.mouse_sens*1000
+	print(GlobalSettings.mouse_sens)
+	mouse_sens_label.text = str(GlobalSettings.mouse_sens)
+	mouse_sens_slider.set_value_no_signal(GlobalSettings.mouse_sens)
+	mouse_sens_spinbox.value = GlobalSettings.mouse_sens
 
 
 
@@ -65,17 +65,17 @@ func _on_aspect_ratio_btn_item_selected(index):
 
  # 0.001
 func _on_h_slider_value_changed(value):
-	mouse_sens_label.text = str(value / 10)
-	mouse_sens_text.text = str(value /10)
-	mouse_sens_spinbox.value = (value / 10)
+	mouse_sens_label.text = str(value)
+	mouse_sens_text.text = str(value)
+	mouse_sens_spinbox.value = (value)
 	#GlobalSettings.toggle_mouse_sens(value /10000)
 
 
 func _on_spin_box_value_changed(value):
 	mouse_sens_label.text = str(value)
-	GlobalSettings.toggle_mouse_sens(value /1000)
-	if mouse_sens_slider.value != value*10:
-		mouse_sens_slider.value = value*10
+	GlobalSettings.toggle_mouse_sens(value)
+	if mouse_sens_slider.value != value:
+		mouse_sens_slider.value = value
 	
 
 

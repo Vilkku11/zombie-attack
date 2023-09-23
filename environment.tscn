@@ -47,3 +47,8 @@ inventory_data = SubResource("Resource_4gyfh")
 [node name="PickUp" parent="." index="2" instance=ExtResource("7_q40dt")]
 transform = Transform3D(-0.000122114, 0, 1, 0, 1, 0, -1, 0, -0.000122114, 8.0386, 1.29943, 0.598946)
 slot_data = SubResource("Resource_oosup")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, -10.368)
+use_collision = true
+size = Vector3(5, 1, 5)
