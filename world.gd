@@ -1,6 +1,8 @@
 extends Node
 
 @onready var main_menu = $CanvasLayer/MainMenu
+@onready var ingame_menu = $CanvasLayer/InGameMenu
+
 @onready var address_entry = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry
 @onready var hud = $CanvasLayer/HUD
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
@@ -14,9 +16,23 @@ const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
 
 
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
+			if main_menu.is_visible():
+				print("test")
+				get_tree().quit()
+			elif ingame_menu.is_visible():
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				ingame_menu.hide()
+				main_menu.show()
+			else:
+				main_menu.hide()
+				ingame_menu.show()
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				
 		
 
 
@@ -28,6 +44,7 @@ func _on_host_button_pressed():
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	
 	
