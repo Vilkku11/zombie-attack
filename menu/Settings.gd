@@ -2,6 +2,7 @@ extends PanelContainer
 # HUD
 @onready var main_menu = $"../MainMenu"
 @onready var settings = $"."
+@onready var in_game_menu = $"../InGameMenu"
 
 # Video setting BTN's
 @onready var display_mode_btn = $MarginContainer/TabContainer/Video/MarginContainer/GridContainer/DisplayModeBtn
@@ -76,3 +77,13 @@ func _on_spin_box_value_changed(value):
 	if mouse_sens_slider.value != value*10:
 		mouse_sens_slider.value = value*10
 	
+
+
+func _on_to_main_menu_btn_pressed():
+	in_game_menu.hide()
+	main_menu.show()
+
+
+func _on_settings_btn_pressed():
+	in_game_menu.hide()
+	settings.show()

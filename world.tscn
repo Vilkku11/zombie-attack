@@ -93,6 +93,10 @@ text = "Settings"
 layout_mode = 2
 text = "Quit"
 
+[node name="TestLevelBtn" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Test Level"
+
 [node name="InGameMenu" type="PanelContainer" parent="CanvasLayer"]
 visible = false
 anchors_preset = 14
@@ -117,13 +121,13 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/InGameMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ToMainMenuBtn" type="Button" parent="CanvasLayer/InGameMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Exit"
-
 [node name="SettingsBtn" type="Button" parent="CanvasLayer/InGameMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
+
+[node name="ToMainMenuBtn" type="Button" parent="CanvasLayer/InGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
 
 [node name="Settings" type="PanelContainer" parent="CanvasLayer"]
 visible = false
@@ -360,14 +364,13 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("7_qsnr3")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://player.tscn")
-spawn_path = NodePath("..")
-
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/TestLevelBtn" to="." method="_on_test_level_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/InGameMenu/MarginContainer/VBoxContainer/SettingsBtn" to="CanvasLayer/Settings" method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/InGameMenu/MarginContainer/VBoxContainer/ToMainMenuBtn" to="CanvasLayer/Settings" method="_on_to_main_menu_btn_pressed"]
 [connection signal="item_selected" from="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer/ResolutionBtn" to="CanvasLayer/Settings" method="_on_resolution_btn_item_selected"]
 [connection signal="item_selected" from="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer/AspectRatioBtn" to="CanvasLayer/Settings" method="_on_aspect_ratio_btn_item_selected"]
 [connection signal="item_selected" from="CanvasLayer/Settings/MarginContainer/TabContainer/Video/MarginContainer/GridContainer/DisplayModeBtn" to="CanvasLayer/Settings" method="_on_display_mode_btn_item_selected"]
@@ -376,4 +379,3 @@ spawn_path = NodePath("..")
 [connection signal="value_changed" from="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer/GridContainer/HBoxContainer/HSlider" to="CanvasLayer/Settings" method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/Settings/MarginContainer/TabContainer/Mouse + Keyboard2/MarginContainer/GridContainer/HBoxContainer/SpinBox" to="CanvasLayer/Settings" method="_on_spin_box_value_changed"]
 [connection signal="pressed" from="CanvasLayer/Settings/MarginContainer/TabContainer/Back" to="CanvasLayer/Settings" method="_on_back_pressed"]
-[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
