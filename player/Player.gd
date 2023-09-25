@@ -3,6 +3,7 @@ extends CharacterBody3D
 # Player nodes
 @onready var nek = $Nek
 @onready var head = $Nek/Head
+@onready var camera = $Nek/Head/Camera3D
 @onready var standing_collision_shape = $StandingCollisionShape
 @onready var crouching_collision_shape = $CrouchingCollisionShape
 @onready var raycast = $RayCast3D
@@ -18,6 +19,7 @@ var lerp_speed = 10.0
 # Direction
 var direction = Vector3.ZERO
 var crouching_depth = -0.5
+var free_look_tilt_amount = 5
 
 # States
 
@@ -87,13 +89,17 @@ func _physics_process(delta):
 			
 
 	# Handle free looking
+	
 	if Input.is_action_pressed("free_look"):
 			
 			free_looking = true
+			camera.rotation.z = -deg_to_rad(nek.rotation.y*free_look_tilt_amount)
+			
 	else:
 		
 		free_looking = false
 		nek.rotation.y = lerp(nek.rotation.y, 0.0, delta*lerp_speed)
+		camera.rotation.z = lerp(camera.rotation.z, 0.0, delta*lerp_speed)
 		
 	# Add the gravity.
 	if not is_on_floor():
