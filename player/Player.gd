@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var standing_collision_shape = $StandingCollisionShape
 @onready var crouching_collision_shape = $CrouchingCollisionShape
 @onready var raycast = $RayCast3D
+@onready var animation_player = $Nek/Head/Eyes/AnimationPlayer
 
 # Speed variables
 var current_speed = 5.0
@@ -18,11 +19,13 @@ const JUMP_VELOCITY = 4.5
 var lerp_speed = 10.0
 var air_lerp_speed = 3.0
 
-# Direction
+# Movement vars
 
 var direction = Vector3.ZERO
 var crouching_depth = -0.5
 var free_look_tilt_amount = 5
+
+var last_velocity = Vector3.ZERO
 
 # States
 
@@ -69,7 +72,7 @@ func _physics_process(delta):
 	
 	# Handle movement state
 	
-	if Input.is_action_pressed("crouch"):
+	if Input.is_action_pressed("crouch") && is_on_floor():
 		current_speed = lerp(current_speed, crouching_speed, delta * lerp_speed)
 		head.position.y = lerp(head.position.y, crouching_depth,delta*lerp_speed)
 		standing_collision_shape.disabled = true
@@ -148,9 +151,18 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	# Handle Jump.
+	
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
+
+
+	# Handle landing
+	if is_on_floor():
+		if last_velocity.y < -6.0:
+			print(last_velocity.y)
+			animation_player.play("landing")
+	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if is_on_floor():
@@ -166,4 +178,6 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 
+	last_velocity = velocity
 	move_and_slide()
+	

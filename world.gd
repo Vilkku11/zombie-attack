@@ -30,7 +30,7 @@ func _unhandled_input(event):
 			elif ingame_menu.is_visible():
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				ingame_menu.hide()
-				main_menu.show()
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			else:
 				main_menu.hide()
 				ingame_menu.show()
