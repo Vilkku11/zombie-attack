@@ -15,6 +15,8 @@ var mouse_sens = 0.005
 func save_config():
 	var config = ConfigFile.new()
 	config.set_value("DISPLAY", "display_mode", display_mode)
+	config.set_value("DISPLAY", "resolution", resolution)
+	config.set_value("DISPLAY", "aspect_ratio", aspect_ratio)
 	config.set_value("DISPLAY", "vsync", vsync)
 	config.set_value("DISPLAY", "fps_counter", fps_counter)
 	
@@ -33,11 +35,15 @@ func load_config():
 		
 	for setting in config.get_sections():
 		display_mode = config.get_value("DISPLAY", "display_mode")
+		resolution = config.get_value("DISPLAY", "resolution")
+		aspect_ratio = config.get_value("DISPLAY", "aspect_ratio")
 		vsync = config.get_value("DISPLAY", "vsync")
 		fps_counter = config.get_value("DISPLAY", "fps_counter")
 		
 		mouse_sens = config.get_value("MOUSE", "mouse_sens")
 	toggle_display_mode(display_mode)
+	toggle_resolution(resolution)
+	toggle_aspect_ratio(aspect_ratio)
 	toggle_vsync(vsync)
 	toggle_fps_counter(fps_counter)
 	toggle_mouse_sens(mouse_sens)
@@ -79,10 +85,10 @@ func toggle_fps_counter(value):
 		fps_counter.hide()
 
 func toggle_resolution(value):
-	pass
+	GlobalSettings.resolution = value
 
 func toggle_aspect_ratio(value):
-	pass
+	GlobalSettings.aspect_ratio = value
 
 func toggle_mouse_sens(value):
 	GlobalSettings.mouse_sens = value

@@ -61,7 +61,7 @@ func _on_resolution_btn_item_selected(index):
 	GlobalSettings.toggle_resolution(index)
 	
 func _on_aspect_ratio_btn_item_selected(index):
-	pass # Replace with function body.
+	GlobalSettings.toggle_aspect_ratio(index)
 
  # 0.001
 func _on_h_slider_value_changed(value):

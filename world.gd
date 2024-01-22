@@ -25,7 +25,6 @@ func _ready():
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("quit"):
 			if main_menu.is_visible():
-				print("test")
 				get_tree().quit()
 			elif ingame_menu.is_visible():
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
